@@ -1,3 +1,5 @@
+# should only be run under it's own filepath
+
 import os,sys
 import argparse
 import simplejson as json
@@ -49,7 +51,7 @@ jsfile.close()
 
 
 # Replace user_data.json
-with open("/ffbo.processor/components/processor_component/data/user_data.json", "r") as f:
+with open("components/processor_component/data/user_data.json", "r") as f:
     userdata = json.load(f)
 username = config["USER"]["user"]
 salt = config["USER"]["salt"]
@@ -59,8 +61,8 @@ userdata["_default"]["1"]["auth_details"]["secret"] = secret
 userdata["_default"]["1"]["auth_details"]["salt"] = salt
 userdata["_default"]["1"]["username"] = username
 
-with open("/ffbo.processor/components/processor_component/data/user_data.json", "w") as f:
-    json.dump(userdata, indent=4 * ' ', separators=(',',':'))
+with open("components/processor_component/data/user_data.json", "w") as f:
+    json.dump(userdata, f, indent=4 * ' ', separators=(',',':'))
 
 parser = argparse.ArgumentParser('config.py',description="Script for setting up Crossbar configuration file")
 
